@@ -33,8 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,8 +58,17 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportBooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportBooks.Designer.cs">
+      <DependentUpon>ImportBooks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ImportBooks.resx">
+      <DependentUpon>ImportBooks.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +78,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +91,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eBookManager.Engine\eBookManager.Engine.csproj">
+      <Project>{32d3c4d1-97cc-484c-bf52-ede38a696c1f}</Project>
+      <Name>eBookManager.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eBookManager.Helper\eBookManager.Helper.csproj">
+      <Project>{e14cbc2a-b10d-427a-88f4-315ce099b25e}</Project>
+      <Name>eBookManager.Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ico\importBooks.ico" />
+    <Content Include="ico\mainForm.ico" />
+    <Content Include="img\add_ebook_to_storage_space.png" />
+    <Content Include="img\add_new_storage_space.png" />
+    <Content Include="img\docx16.png" />
+    <Content Include="img\docxx16.png" />
+    <Content Include="img\eBook.png" />
+    <Content Include="img\epubx16.png" />
+    <Content Include="img\folder-close-x16.png" />
+    <Content Include="img\folder_exp_x16.png" />
+    <Content Include="img\image sources.txt" />
+    <Content Include="img\no_eBook.png" />
+    <Content Include="img\pdfx16.png" />
+    <Content Include="img\ReadEbook.png" />
+    <Content Include="img\storage_space_cloud.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
