@@ -1,9 +1,12 @@
-﻿using eBookManager.Engine;
+using eBookManager.Engine;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace eBookManager.Helper
 {
@@ -49,6 +52,44 @@ namespace eBookManager.Helper
                 storageSpaceId = (from r in space select r.ID).Max() + 1;
             }
             return false;
+        }
+        public static void WriteToDataStore(this List<StorageSpace> value,
+            string storagePath, bool appendToExistingFile = false)
+        {
+            
+         
+            var json = new JsonSerializer();
+            json.Formatting = Formatting.Indented;
+            using (StreamWriter sw = new StreamWriter(storagePath,appendToExistingFile))
+            {
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    json.Serialize(writer, value);
+                }
+            }
+        }
+
+        public static List<StorageSpace> ReadFromDataStore(this List<StorageSpace> value,
+            string storagePath)
+        {
+            JsonSerializer json = new JsonSerializer();
+            if (!File.Exists(storagePath))
+            {
+                var newFile = File.Create(storagePath);
+                newFile.Close();
+            }
+            using (StreamReader sr = new StreamReader(storagePath))
+            {
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    var retVal = json.Deserialize<List<StorageSpace>>(reader);
+                    if (retVal is null)
+                    {
+                        retVal = new List<StorageSpace>();
+                    }
+                    return retVal;
+                }
+            }
         }
     }
 }
