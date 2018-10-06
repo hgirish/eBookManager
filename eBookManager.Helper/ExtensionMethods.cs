@@ -51,7 +51,7 @@ namespace eBookManager.Helper
                 }
                 storageSpaceId = (from r in space select r.ID).Max() + 1;
             }
-            return false;
+            return exists;
         }
         public static void WriteToDataStore(this List<StorageSpace> value,
             string storagePath, bool appendToExistingFile = false)

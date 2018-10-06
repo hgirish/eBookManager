@@ -70,7 +70,10 @@ namespace eBookManager
                 }
             }
         }
-
+        private void ImportBooks_Load(object sender, EventArgs e)
+        {
+            // TODO
+        }
         private void btnSelectSourceFolder_Click(object sender, EventArgs e)
         {
             try
@@ -101,6 +104,29 @@ namespace eBookManager
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void tvFoundBooks_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            DocumentEngine engine = new DocumentEngine();
+            string path = e.Node.Tag?.ToString() ?? "";
+
+            if (File.Exists(path))
+            {
+                var (dateCreated, dateLastAccessed, fileName,
+                    fileExtension, fileLength, hasError) =
+                    engine.GetFileProperties(e.Node.Tag.ToString());
+
+                if (!hasError)
+                {
+                    txtFileName.Text = fileName;
+                }
+            }
+        }
+
+        private void btnAddeBookToStorageSpace_Click(object sender, EventArgs e)
+        {
+            // TODO
+
         }
     }
 }
